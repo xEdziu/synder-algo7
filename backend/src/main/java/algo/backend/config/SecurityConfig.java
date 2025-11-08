@@ -19,7 +19,7 @@ public class SecurityConfig {
                     .requestMatchers("/api/v1/**").permitAll()
                     .requestMatchers("/**", "/static/**", "/resources/**").permitAll()
                     .requestMatchers("/styles/**", "/scripts/**", "/img/**", "/fonts/**").permitAll()
-                    .requestMatchers("/actuator/health").permitAll() // Allow access to health check
+                    .requestMatchers("/api/v1/health").permitAll() // Allow access to health check
                     .requestMatchers("/styles/**", "/scripts/**", "/img/**", "/fonts/**").permitAll()
                     .anyRequest().authenticated()
             )
