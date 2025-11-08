@@ -4,7 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
+export default function App() {
   const [healthStatus, setHealthStatus] = useState<HealthResponse | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -34,20 +34,24 @@ function App() {
       </div>
       <h1>Synder Algo7</h1>
       <div className="card">
-        <button onClick={handleHealthCheck} disabled={loading}>
+        <button
+          onClick={handleHealthCheck}
+          disabled={loading}
+          className="btn-primary"
+        >
           {loading ? 'Checking...' : 'Check Backend Health'}
         </button>
 
         {error && (
-          <div style={{ color: 'red', marginTop: '1rem' }}>
+          <div className="mt-4 p-3 rounded-md border" style={{ color: 'var(--danger)', borderColor: 'var(--danger)' }}>
             <strong>Error:</strong> {error}
           </div>
         )}
 
         {healthStatus && (
-          <div style={{ marginTop: '1rem', textAlign: 'left' }}>
+          <div className="mt-4 text-left">
             <strong>Health Status:</strong>
-            <pre style={{ background: '#1a1a1a', padding: '1rem', borderRadius: '8px' }}>
+            <pre className="card-dark mt-2 overflow-auto">
               {JSON.stringify(healthStatus, null, 2)}
             </pre>
           </div>
@@ -58,27 +62,4 @@ function App() {
       </p>
     </>
   )
-}
-
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {colors.map(({ name, value }) => (
-          <div
-            key={name}
-            className="flex flex-col border border-[var(--border-muted)] rounded-lg overflow-hidden shadow-sm"
-          >
-            <div
-              className="h-20 w-full"
-              style={{ backgroundColor: `var(${name})` }}
-            ></div>
-            <div className="p-3 text-sm">
-              <div className="font-semibold text-[var(--color-tertiary)]">
-                {name}
-              </div>
-              <div className="text-[var(--text-muted)]">{value}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 }
