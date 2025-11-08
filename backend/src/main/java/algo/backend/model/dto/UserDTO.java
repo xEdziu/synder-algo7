@@ -1,4 +1,4 @@
-package algo.backend.controller.user;
+package algo.backend.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
