@@ -13,41 +13,33 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final UserDetailsService userDetailsService;
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/api/v1/health").permitAll()
-                        .requestMatchers("/api/v1/authorized/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/authorized/**").hasAnyRole("USER", "ADMIN")
-                        .anyRequest().authenticated()
+            .authorizeHttpRequests(authz -> authz
+                    .requestMatchers("/api/v1/authorized/admin/**").hasAuthority("ROLE_ADMIN")
+                    .requestMatchers("/api/v1/authorized/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                    .requestMatchers("/api/v1/**").permitAll()
+                    .requestMatchers("/**", "/static/**", "/resources/**").permitAll()
+                    .requestMatchers("/styles/**", "/scripts/**", "/img/**", "/fonts/**").permitAll()
+                    .requestMatchers("/api/v1/health").permitAll() // Allow access to health check
+                    .requestMatchers("/styles/**", "/scripts/**", "/img/**", "/fonts/**").permitAll()
+                    .anyRequest().authenticated()
+            )
+            .cors(httpSecurityCorsConfigurer ->
+                httpSecurityCorsConfigurer.configurationSource(request ->
+                    new CorsConfiguration().applyPermitDefaultValues()
                 )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
+            )
+            .csrf(csrf -> csrf.disable());
+        
         return http.build();
-    }
-
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        return provider;
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
     }
 }
