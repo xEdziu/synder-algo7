@@ -60,4 +60,25 @@ function App() {
   )
 }
 
-export default App
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {colors.map(({ name, value }) => (
+          <div
+            key={name}
+            className="flex flex-col border border-[var(--border-muted)] rounded-lg overflow-hidden shadow-sm"
+          >
+            <div
+              className="h-20 w-full"
+              style={{ backgroundColor: `var(${name})` }}
+            ></div>
+            <div className="p-3 text-sm">
+              <div className="font-semibold text-[var(--color-tertiary)]">
+                {name}
+              </div>
+              <div className="text-[var(--text-muted)]">{value}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
