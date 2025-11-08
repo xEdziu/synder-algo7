@@ -2,6 +2,7 @@ package algo.backend.config;
 
 import algo.backend.model.entity.User;
 import algo.backend.model.entity.UserRole;
+import algo.backend.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +16,7 @@ import java.util.Date;
 @Configuration
 public class SetupConfig {
     @Bean
-    CommandLineRunner commandLineRunnerSetup(){
+    CommandLineRunner commandLineRunnerSetup(UserRepository userRepository){
         return args -> {
             User user = new User(
                     "andrzej",
@@ -24,6 +25,9 @@ public class SetupConfig {
                     UserRole.ROLE_USER,
                     new java.sql.Timestamp(new Date().getTime())
             );
+            user.setEnabled(true);
+            userRepository.save(user);
         };
+
     }
 }
