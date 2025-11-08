@@ -49,12 +49,25 @@
 @layer base {
   * {
     border-color: var(--border);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Domyślnie tryb ciemny - dodaj klasę 'dark' do html */
+  html {
+    color-scheme: dark;
   }
 
   body {
     @apply font-sans transition-colors duration-300;
     background-color: var(--bg);
     color: var(--text);
+  }
+
+  #root {
+    margin: 0;
+    padding: 0;
   }
 
   h1,
