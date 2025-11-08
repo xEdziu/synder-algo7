@@ -44,8 +44,4 @@ public class UserService implements UserDetailsService {
             case null, default -> throw new IllegalStateException("Nie udało się pobrać zalogowanego użytkownika.");
             }
         }
-    }
-
-
-
 }
