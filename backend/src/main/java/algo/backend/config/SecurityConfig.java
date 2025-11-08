@@ -14,8 +14,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/api/v1/health").permitAll()
-                .anyRequest().authenticated()
+                    .requestMatchers("/api/v1/authorized/admin/**").hasAuthority("ROLE_ADMIN")
+                    .requestMatchers("/api/v1/authorized/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                    .requestMatchers("/api/v1/**").permitAll()
+                    .requestMatchers("/**", "/static/**", "/resources/**").permitAll()
+                    .requestMatchers("/styles/**", "/scripts/**", "/img/**", "/fonts/**").permitAll()
+                    .requestMatchers("/actuator/health").permitAll() // Allow access to health check
+                    .requestMatchers("/styles/**", "/scripts/**", "/img/**", "/fonts/**").permitAll()
+                    .anyRequest().authenticated()
             )
             .csrf(csrf -> csrf.disable());
         
