@@ -9,7 +9,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OrdersDTO {
     Long id;
-    ShoesDTO shoes;
+    Long shoesId;
+    String shoesType;
+    Integer shoesSize;
+    Integer shoesPrice;
+    Integer shoesProductionPrice;
     String status;
     String description;
     String date;

@@ -25,7 +25,7 @@ public class ShoesService {
                         shoes.getProductionPrice()
                 )).toList();
 
-        Map<String, Object> response = CustomReturnables.getOkResponseMap("SHOES WAS DOWNLOADED SUCCESSFULLY");
+        Map<String, Object> response = CustomReturnables.getOkResponseMap("SHOES WERE DOWNLOADED SUCCESSFULLY");
         response.put("shoes", shoesList);
         return response;
     }

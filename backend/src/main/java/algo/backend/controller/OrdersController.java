@@ -3,7 +3,7 @@ package algo.backend.controller;
 import algo.backend.config.CustomReturnables;
 import java.util.Map;
 
-import algo.backend.service.TransactionsService;
+import algo.backend.service.OrdersService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 @Setter
 @RestController
 @RequestMapping("/api/v1")
-public class TransactionsController {
-    private final TransactionsService transactionsService;
+public class OrdersController {
+    private final OrdersService ordersService;
 
-    @GetMapping("/transactions")
-  public Map<String, Object> shoes() {
+    @GetMapping("/orders")
+  public Map<String, Object> orders() {
     return CustomReturnables.getOkResponseMap("");
   }
 
-  @GetMapping("/transactions/all")
-    public Map<String,Object> getAllTransactions(){
-      return transactionsService.getAllTransactions();
+  @GetMapping("/orders/all")
+    public Map<String,Object> getAllOrders(){
+      return ordersService.getAllOrders();
   }
 
 
