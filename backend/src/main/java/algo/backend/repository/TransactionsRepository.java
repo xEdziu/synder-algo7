@@ -9,6 +9,6 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+public interface TransactionsRepository extends JpaRepository<Transaction, Long> {
     List<Transaction> findByOrderId(Long orderId);
 }
