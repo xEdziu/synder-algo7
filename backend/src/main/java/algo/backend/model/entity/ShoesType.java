@@ -1,6 +1,6 @@
 package algo.backend.model.entity;
 
-public enum OrderType {
+public enum ShoesType {
     SNEAKERS,
     MOCASINS,
     BOOTS,

@@ -32,13 +32,13 @@ public class Orders {
     )
     private Shoes shoes;
     @Enumerated(EnumType.STRING)
-    private OrderType orderType;
+    private ShoesType orderType;
     private String description="";
     private LocalDate data;
     private Integer quantity;
 
 
-    public Orders(Shoes shoes, OrderType orderType, String description, LocalDate data, Integer quantity) {
+    public Orders(Shoes shoes, ShoesType orderType, String description, LocalDate data, Integer quantity) {
         this.shoes = shoes;
         this.orderType = orderType;
         this.description = description;

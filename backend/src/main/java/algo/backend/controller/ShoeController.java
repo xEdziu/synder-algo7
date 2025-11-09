@@ -13,9 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class ShoeController {
+    private final ShoesService shoesService;
 
   @GetMapping("/shoes")
   public Map<String, Object> shoes() {
     return CustomReturnables.getOkResponseMap("");
   }
+
+  @GetMapping("/shoes/all")
+    public Map<String, Object> getAllShoes() {
+    return shoesService.getAllShoes();
+    }
+
 }

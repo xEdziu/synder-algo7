@@ -24,13 +24,13 @@ public class Shoes {
     )
     private Long id;
     @Enumerated(EnumType.STRING)
-    private OrderType shoesType;
+    private ShoesType shoesType;
     private Integer size;
     private Integer price;
     private Integer productionPrice;
 
 
-    public Shoes(OrderType shoesType, Integer size, Integer price, Integer productionPrice) {
+    public Shoes(ShoesType shoesType, Integer size, Integer price, Integer productionPrice) {
         this.shoesType = shoesType;
         this.size = size;
         this.price = price;
